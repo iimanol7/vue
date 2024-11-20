@@ -5,7 +5,7 @@
   <input type="text" placeholder="Introduce una nota" v-model="nota"> <input type="submit" value="añadir" @click="añadirNota">
   <br>
   <ul>
-    <li v-for=" (notaa) in notas">
+    <li v-for=" (notaa, index) in notas">
       {{ notaa }}
       <button @click="eliminarNota">ELiminar</button>
     </li>
