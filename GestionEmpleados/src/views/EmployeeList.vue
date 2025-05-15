@@ -2,7 +2,7 @@
 
 <h1>Empleados</h1>
 
-<select v-model="departamentoSeleccionado">
+<select v-model="departamentoSeleccionado" @change="filtrarEmpleados">
     <option value="Todos">Todos</option>
     <option :value="departamento" v-for="departamento in departamentos">{{ departamento }}</option>
 </select>
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="(empleado, index) in empleados" :key="index" :class="{'none' : departamentoSeleccionado === empleado.department}">
+        <tr v-for="(empleado, index) in empleados" :key="index" >
             <td>{{ empleado.name }}</td>
             <td>{{ empleado.department }}</td>
             <td>{{ empleado.salary }}</td>
@@ -39,11 +39,15 @@ const empleados = ref([])
 const departamentos = ref([])
 const departamentoSeleccionado = ref('Todos')
 
+const filtrarEmpleados = () =>{
+    empleados.value = employeeStore.filtrarEmpleados(departamentoSeleccionado.value)
+}
+
 
 onMounted(async ()=>{
     empleados.value = await employeeStore.cargarEmpleados();
-    
-   departamentos.value = employeeStore.filtrarEmpleados()
+
+    departamentos.value = employeeStore.departamentos()
 })
 
 </script>

@@ -4,8 +4,11 @@ import axios from 'axios'
 
 export const useEmployeeStore = defineStore('counter', {
   state: () => ({
+
     empleados : []
+
   }),
+
 
   actions : {
 
@@ -15,13 +18,27 @@ export const useEmployeeStore = defineStore('counter', {
       return this.empleados
     },
 
-    filtrarEmpleados(){
+    departamentos(){
       //filtrar por departamento
       const departamentos = new Set() //filtra y elimina los duplicados
       this.empleados.forEach(empleado =>{
         departamentos.add(empleado.department)
       })
       return departamentos
+    },
+
+    filtrarEmpleados(departamento){
+      if(departamento == 'Todos') return this.empleados;
+      let empleadosFiltrado = []
+      this.empleados.forEach(emp =>{
+        emp.department == departamento ? empleadosFiltrado.push(emp) : ''
+      })
+      return empleadosFiltrado
+    },
+
+    añadirEmpleados(empleado){
+      this.empleados.push(empleado)
+      return this.empleados
     }
 
   },
