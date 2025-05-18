@@ -71,7 +71,7 @@ export const useFestividadesStore = defineStore('festividades', {
       return this.festividades.filter(fest => {
         const fecha = new Date(fest.fecha)
 
-        //si se cumple (true) se añade al array
+        //si se cumple (true) se añade al array, si es false pasa al siguiente
         return fecha > FechaActual
       })
     }
