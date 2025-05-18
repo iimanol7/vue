@@ -1,60 +1,31 @@
 <template>
+    <h1>Lista de empleados</h1>
+    <br>
 
-<h1>Empleados</h1>
+    <input type="text" v-model="store.departamentoSeleccionado">
 
-<select v-model="departamentoSeleccionado" @change="filtrarEmpleados">
-    <option value="Todos">Todos</option>
-    <option :value="departamento" v-for="departamento in departamentos">{{ departamento }}</option>
-</select>
-<br>
-<br>
+    <br>
+    <ul>
+        <li v-for="empleado in store.filtrarDepartamento">
+            {{ empleado.name }} - {{ empleado.department }} - {{ empleado.salary }}
+        </li>
+    </ul>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Departamento</th>
-            <th>Salario</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr v-for="(empleado, index) in empleados" :key="index" >
-            <td>{{ empleado.name }}</td>
-            <td>{{ empleado.department }}</td>
-            <td>{{ empleado.salary }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<p>{{ departamentoSeleccionado }}</p>
-
+    <AddEmployee></AddEmployee>
+    <EmployeeStats></EmployeeStats>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
 import { useEmployeeStore } from '@/stores/employeeStore';
+import { onMounted } from 'vue';
+import AddEmployee from './AddEmployee.vue';
+import EmployeeStats from './EmployeeStats.vue';
+const store = useEmployeeStore()
 
-const employeeStore = useEmployeeStore();
-const empleados = ref([])
-const departamentos = ref([])
-const departamentoSeleccionado = ref('Todos')
+ 
 
-const filtrarEmpleados = () =>{
-    empleados.value = employeeStore.filtrarEmpleados(departamentoSeleccionado.value)
-}
-
-
-onMounted(async ()=>{
-    empleados.value = await employeeStore.cargarEmpleados();
-
-    departamentos.value = employeeStore.departamentos()
+onMounted(()=>{
+    store.cargarEmpleados()
 })
-
 </script>
-
-<style scoped>
-    .none{
-        display: none;
-    }
-</style>
 

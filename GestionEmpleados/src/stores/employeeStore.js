@@ -2,10 +2,12 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
+
 export const useEmployeeStore = defineStore('counter', {
   state: () => ({
 
-    empleados : []
+    empleados : [],
+    departamentoSeleccionado : ''
 
   }),
 
@@ -15,46 +17,39 @@ export const useEmployeeStore = defineStore('counter', {
     async cargarEmpleados(){
       const response = await axios.get('Empleados.json')
       this.empleados = response.data
-      return this.empleados
     },
 
-    departamentos(){
-      //filtrar por departamento
-      const departamentos = new Set() //filtra y elimina los duplicados
-      this.empleados.forEach(empleado =>{
-        departamentos.add(empleado.department)
-      })
-      return departamentos
-    },
-
-    filtrarEmpleados(departamento){
-      if(departamento == 'Todos') return this.empleados;
-      let empleadosFiltrado = []
-      this.empleados.forEach(emp =>{
-        emp.department == departamento ? empleadosFiltrado.push(emp) : ''
-      })
-      return empleadosFiltrado
-    },
-
-    añadirEmpleados(empleado){
+    añadirEmpleado(empleado){
       this.empleados.push(empleado)
-      return this.empleados
     }
 
   },
 
   getters : {
     
-    salarioMedio(){
-      let salario = 0
-      this.empleados.forEach(empleado=>{
-        salario += empleado.salary
-      })
-      return salario / this.empleados.length
-    },
-
     totalEmpleados(){
       return this.empleados.length
+    },
+
+    salarioPromedio(){
+      let suma = this.empleados.reduce((acumulador, empleado)=>acumulador+=empleado.salary, 0) 
+      return suma / this.empleados.length
+      // let suma = 0
+      // this.empleados.forEach(empleado=>{
+      //   suma+=empleado.salary
+      // })
+    },
+
+    filtrarDepartamento(){
+      if (this.departamentoSeleccionado == '') return this.empleados 
+      return this.empleados.filter(emp => emp.department.toLowerCase().includes(this.departamentoSeleccionado.toLowerCase()))
+      
+    },
+    empleadosPorDepartamento(){
+      return this.empleados.reduce((acc, emp) => {
+        acc[emp.department] = (acc[emp.department] || 0) + 1;
+        return acc;
+      }, {});
     }
 
   }

@@ -17,14 +17,6 @@ const router = createRouter({
       path : '/employees',
       component: EmployeeList
     },
-    {
-      path : '/stats',
-      component: EmployeeStats
-    },
-    {
-      path : '/add-employee',
-      component: AddEmployee
-    },
     
     //lazy loading (solo carga cuando es necesario)
     // {

@@ -17,7 +17,7 @@ const nombres = personas.map(p => p.nombre);
 console.log("Nombres:", nombres);
 
 // 3. reduce(): reduce el array a un único valor (acumulador)
-const suma = numeros.reduce((acumulador, actual) => acumulador + actual, 0);
+const suma = numeros.reduce((acumulador, actual) => acumulador + actual, 0) //valor inical del acumulador;
 console.log("Suma total:", suma);
 
 // 4. findIndex(): devuelve el índice del primer elemento que cumple una condición
