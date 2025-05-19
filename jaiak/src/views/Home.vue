@@ -5,7 +5,7 @@
     <ul>
         <li v-for="(festividad, index) in store.festividadesFiltradas">
             {{ festividad.nombre }} - {{ festividad.municipio }} - {{ festividad.fecha }} - 
-            <input type="checkbox" :checked="festividad.asistido" @change="store.toggleAsistido(index)">
+            <input type="checkbox" :checked="festividad.asistido" @change="store.toggleAsistido(festividad.id)">
         </li>
     </ul>
 

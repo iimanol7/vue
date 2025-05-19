@@ -24,7 +24,9 @@ export const useFestividadesStore = defineStore('festividades', {
     },
 
     toggleAsistido(id) {
-      this.festividades[id].asistido = true
+      //busco el seleccionado
+      const selec = this.festividades.findIndex(f =>f.id == id)
+      this.festividades[selec].asistido = true
     }
 
   },
