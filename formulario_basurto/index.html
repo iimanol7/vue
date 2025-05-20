@@ -1,0 +1,33 @@
+<!-- formulario.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Servicios</title>
+    <script type="module" src="validar.js" defer></script> <!-- Importamos validar.js -->
+</head>
+<body>
+    <h1>Formulario de Servicios</h1>
+    <form id="formulario">
+        <div>
+            <label for="servicio">Nombre del servicio:</label>
+            <input type="text" id="servicio" name="servicio" required>
+        </div>
+        <div>
+            <label for="pabellon">Pabellón:</label>
+            <select id="pabellon" name="pabellon" required>
+                <option value="Arrupe">Arrupe</option>
+                <option value="Areilza">Areilza</option>
+                <option value="Aztarain">Aztarain</option>
+                <option value="Guturbai">Guturbai</option>
+            </select>
+        </div>
+        <div>
+            <label for="mostrar">Mostrar:</label>
+            <input type="checkbox" id="mostrar" name="mostrar" checked>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

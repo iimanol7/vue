@@ -17,7 +17,7 @@ const nombres = personas.map(p => p.nombre);
 console.log("Nombres:", nombres);
 
 // 3. reduce(): reduce el array a un único valor (acumulador)
-const suma = numeros.reduce((acumulador, actual) => acumulador + actual, 0) //valor inical del acumulador;
+const suma = numeros.reduce((acumulador, actual) => acumulador + actual, 0) //0-> valor inical del acumulador;
 console.log("Suma total:", suma);
 
 // 4. findIndex(): devuelve el índice del primer elemento que cumple una condición
@@ -62,7 +62,7 @@ const copia2 = [...numeros];
 copia2.splice(2, 1); // desde el indice 2 elimina 1 elemento
 console.log("Eliminados dos elementos desde índice 1:", copia2);
 
-copia.splice(2, 1, 99); // desde índice 2, elimina 1 elemento y agrega 99
+copia.splice(2, 1, 99); // desde índice 2, elimina 1 elemento y agrega '99'
 console.log("Array con splice:", copia);
 
 
